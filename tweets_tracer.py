@@ -34,7 +34,7 @@ def Get_tweets(username,n):
             html_content = driver.page_source
             soup = BeautifulSoup(html_content, 'html.parser')
 
-            # Find all elements with 'tweetText'
+            # Find all elements with 'element class'
             tweet_text_elements.extend(soup.find_all('div', {'data-testid': 'cellInnerDiv'}))
 
         # first n tweet
@@ -59,13 +59,13 @@ def Count_tiker(Ticker , List_of_users , num_of_tweets,wait_time):
             cnt=0
             tweets=Get_tweets(user , num_of_tweets)
             for k in tweets:
-                counter+= k.lower().count(Ticker.lower())
-                cnt+=  k.lower().count(Ticker.lower())
+                counter+= k.lower().count(Ticker.lower())# count sum Ticker in all accounts
+                cnt+=  k.lower().count(Ticker.lower()) # count sum ticker in this account 
             print(" Ticker : " ,Ticker," has mentioned ",cnt, "times" ,user ,"Account in last ",num_of_tweets,"tweets" )
         print(" Ticker : ",ticker , " has mentioned ",counter , " times in last ",num_of_tweets,"tweets of all Accounts")
         print(f"finsed {t} time --------------------------------------------------------")
         driver.minimize_window()
-        time.sleep(wait_time*60)
+        time.sleep(wait_time*60) #
             
          
 
